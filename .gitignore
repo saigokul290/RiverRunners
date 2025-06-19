@@ -1,0 +1,35 @@
+# Ignore Unity cache and generated files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Ignore user-specific files
+UserSettings/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# OS generated files
+.DS_Store
+._*
+Thumbs.db
+
+# Visual Studio Code settings
+.vscode/
+
+# Ignore Unity asset meta files (optional - if you want Git to track them, remove this line)
+*.meta
+
+# Ignore Unity generated files
+sysinfo.txt
