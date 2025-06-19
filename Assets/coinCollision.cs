@@ -25,7 +25,7 @@ public class coinCollision : MonoBehaviour
     }
     private void Update()
     {
-        Cn.transform.Rotate(10, 0,0 );
+        Cn.transform.Rotate(1, 0,0 );
     }
 
 }

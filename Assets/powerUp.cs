@@ -25,6 +25,6 @@ public class powerUp : MonoBehaviour {
 	}
 	void Update()
 	{
-		transform.Rotate (0,10,0);
+		//transform.Rotate(0, 1,0 );
 	}
 }
