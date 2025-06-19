@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{85966ECF-6F03-5BE0-BB8C-7A1B02EBF856}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/CREDITS.cs">
+    <Files>
+      <File FileName="Assets/scripts/GameManager.cs" Line="18" Column="6" />
+      <File FileName="Assets/scripts/CREDITS.cs" Line="13" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="run_boy_run" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="scripts" expanded="True">
+                <Node name="CREDITS.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Unity" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c9445907-e64f-4642-962f-646b717145a8" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
