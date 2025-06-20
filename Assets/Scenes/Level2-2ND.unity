@@ -3398,7 +3398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audio: {fileID: 313524286}
   audiobeforespace: {fileID: 225594461}
-  speed: 10
+  speed: 20
   rotationSpeed: 0
   anim: {fileID: 313524282}
   MoveDistance: 1.4
