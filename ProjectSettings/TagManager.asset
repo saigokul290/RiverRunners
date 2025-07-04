@@ -10,6 +10,8 @@ TagManager:
   - bottle
   - sword
   - aj
+  - coin
+  - diamond
   layers:
   - Default
   - TransparentFX
