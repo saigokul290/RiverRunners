@@ -1,4 +1,7 @@
-# Ignore Unity cache and generated files
+# ====================== #
+# Unity generated files  #
+# ====================== #
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
@@ -6,9 +9,29 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
+sysinfo.txt
 
-# Ignore user-specific files
+# Cache & Generated files to ignore explicitly
+[Ll]ibrary/Artifacts/
+[Ll]ibrary/PackageCache/
+[Ll]ibrary/BurstCache/
+[Ll]ibrary/ScriptAssemblies/
+[Ll]ibrary/ShaderCache/
+[Ll]ibrary/SourceAssetDB*
+[Ll]ibrary/Search/
+[Ll]ibrary/StateCache/
+[Ll]ibrary/expandedItems
+[Ll]ibrary/LastSceneManagerSetup.txt
+[Ll]ibrary/EditorUserBuildSettings.asset
+
+# ====================== #
+# User-specific files    #
+# ====================== #
+
 UserSettings/
+UserSettings/EditorUserSettings.asset
+UserSettings/Layouts/
+
 *.csproj
 *.unityproj
 *.sln
@@ -19,17 +42,52 @@ UserSettings/
 *.pidb
 *.booproj
 *.svd
+*.pdb
+*.mdb
 
-# OS generated files
+# ====================== #
+# OS generated files     #
+# ====================== #
+
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon?
 ._*
-Thumbs.db
+.Spotlight-V100
+.Trashes
 
-# Visual Studio Code settings
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ====================== #
+# IDE/Editor settings    #
+# ====================== #
+
+# Visual Studio
+.vs/
+
+# Visual Studio Code
 .vscode/
 
-# Ignore Unity asset meta files (optional - if you want Git to track them, remove this line)
-*.meta
+# JetBrains Rider
+.idea/
+*.sln.iml
 
-# Ignore Unity generated files
-sysinfo.txt
+# ====================== #
+# Unity meta files       #
+# ====================== #
+
+# ⚠️ Recommended to track .meta files — they are essential for asset references
+# DO NOT IGNORE .meta files unless you really know what you're doing
+
+# ====================== #
+# Other generated files  #
+# ====================== #
+
+# Addressables generated binary content (optional)
+Assets/AddressableAssetsData/*/*.bin
+Assets/AddressableAssetsData/*/*.catalog
