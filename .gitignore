@@ -10,6 +10,7 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 sysinfo.txt
+/mlagent/Lib/
 
 # Cache & Generated files to ignore explicitly
 [Ll]ibrary/Artifacts/
