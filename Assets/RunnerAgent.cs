@@ -65,7 +65,7 @@ float GetDistanceToNearestObstacle()
 
         dz = Mathf.Abs(dz); // convert to positive distance ahead
 
-        Debug.Log($"[AheadObstacle] {obs.gameObject.name}, laneIndex={lane}, X={x:F2}");
+        Debug.Log($"[AheadObstacle] {obs.gameObject.name}");
 
         // Track the closest obstacle ahead
         if (dz < minDist)
@@ -78,7 +78,7 @@ float GetDistanceToNearestObstacle()
     // Print which obstacle (if any) was found ahead
     if (nearestObs != null)
     {
-        Debug.Log($"[NearestObstacle] {nearestObs.gameObject.name}, laneIndex={nearestObs.laneIndex}, Z={nearestObs.transform.position.z:F2}, DistanceAhead={minDist:F2}");
+        Debug.Log($"[NearestObstacle] {nearestObs.gameObject.name}, laneIndex={nearestObs.laneIndex}");
     }
     else
     {
