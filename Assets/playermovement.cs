@@ -25,13 +25,13 @@ public class playermovement : MonoBehaviour
         SnapToLaneCenter();
     }
 
- void Update()
+void Update()
 {
     if (!runn) return;
     RUN();
 
-    // Debug: Print current lane and true X every frame
-    Debug.Log($"[PlayerPos] X={transform.position.x:F2}, playerPosition={playerPosition}");
+    // Print lane index and X position
+    //Debug.Log($"[PlayerPos] playerPosition={playerPosition}, X={transform.position:F2}");
 }
 
 
@@ -103,5 +103,6 @@ public class playermovement : MonoBehaviour
         anim.SetBool("j", false);
         anim.SetBool("run", true);
         anim.Play("run");
+        Debug.Log("this is a change");
     }
 }

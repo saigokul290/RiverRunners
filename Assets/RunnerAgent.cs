@@ -38,6 +38,58 @@ int GetLaneIndex(float x)
         movement = GetComponent<playermovement>();
         lastZPosition = transform.position.z;
     }
+    // Returns the distance to the nearest obstacle in the same lane and ahead of the agent
+float GetDistanceToNearestObstacle()
+{
+    float minDist = 1000f; // Use a large default value
+    int agentLane = GetComponent<playermovement>().playerPosition;
+    float agentZ = transform.position.z;
+    ObstacleScript nearestObs = null;
+
+    foreach (var obs in FindObjectsOfType<ObstacleScript>())
+    {
+        int lane = obs.laneIndex;
+        float x = obs.transform.position.x;
+        float z = obs.transform.position.z;
+
+        // Print info for all obstacles
+        //Debug.Log($"[AllObstacles] {obs.gameObject.name}, laneIndex={lane}, X={x:F2}, Z={z:F2}");
+
+        // Only consider obstacles in the agent's lane
+        if (lane != agentLane) continue;
+
+        float dz = z - agentZ;
+
+        // Obstacle is "ahead" if its Z < agentZ (since Z decreases as you move forward)
+        if (dz >= 0) continue;
+
+        dz = Mathf.Abs(dz); // convert to positive distance ahead
+
+        Debug.Log($"[AheadObstacle] {obs.gameObject.name}, laneIndex={lane}, X={x:F2}");
+
+        // Track the closest obstacle ahead
+        if (dz < minDist)
+        {
+            minDist = dz;
+            nearestObs = obs;
+        }
+    }
+
+    // Print which obstacle (if any) was found ahead
+    if (nearestObs != null)
+    {
+        Debug.Log($"[NearestObstacle] {nearestObs.gameObject.name}, laneIndex={nearestObs.laneIndex}, Z={nearestObs.transform.position.z:F2}, DistanceAhead={minDist:F2}");
+    }
+    else
+    {
+        Debug.Log($"[NearestObstacle] No obstacle ahead in lane {agentLane}");
+    }
+
+    return minDist;
+}
+
+
+
 
     public override void OnEpisodeBegin()
     {
@@ -70,37 +122,21 @@ int GetLaneIndex(float x)
 
  public override void CollectObservations(VectorSensor sensor)
 {
-    Vector3 pos = transform.position;
-    sensor.AddObservation(pos.x);
-    sensor.AddObservation(pos.z);
-    sensor.AddObservation(movement.playerPosition);
+    Vector3 p = transform.position;
+    // lane -2/0/+2 normalized to [-1,1]
+    sensor.AddObservation(p.x / 2f);
+    sensor.AddObservation(p.z / 20f);
     sensor.AddObservation(movement.isGrounded ? 1f : 0f);
 
-    for (int lane = 0; lane < 3; lane++)
-    {
-        float minDist = 1000f; // Use a big number for "no obstacle"
-        foreach (var obs in FindObjectsOfType<ObstacleScript>())
-        {
-            float dz = obs.transform.position.z - transform.position.z;
-            // Now, include obstacles slightly behind the agent (to catch near-collisions)
-            if (obs.laneIndex == lane && dz > -1.0f)
-            {
-                if (dz < minDist) minDist = dz;
-            }
-        }
-        sensor.AddObservation(minDist);
+    float dObs = GetDistanceToNearestObstacle();
+    // Optionally: You can still use Raycast for coins if you want
+    float dCoin = 1000f;
 
-        // Logging: show only for current lane to avoid spam
-        if (lane == movement.playerPosition)
-        {
-            Debug.Log(
-                $"[ObsLog] Agent at Z={transform.position.z:F1}, Lane={lane}: Nearest obstacle is {minDist:F1} units ahead"
-            );
-        }
-    }
+    // Debugging:
+    //Debug.Log($"[ObsLog] Agent at Z={p.z:F1},Lane={movement.playerPosition}: Nearest obstacle is {dObs:F1} units ahead");
 
-    // Additional debug for agent's actual lane and X position (optional)
-    Debug.Log($"[AgentObs] agentLane={movement.playerPosition}, agentX={transform.position.x:F2}");
+    sensor.AddObservation(Mathf.Clamp01(dObs / 100f)); // Normalize to [0,1] over a reasonable distance (change denominator if needed)
+    sensor.AddObservation(Mathf.Clamp01(dCoin / 100f)); // Keep this, or add your coin logic as above
 }
 
 
