@@ -1,40 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class coinCollision : MonoBehaviour
 {
     public AudioClip clip;
-    public Text coin;
-    public GameObject Cn;
+    public Text coinCounter;
+    public GameObject rotatingVisual;
 
-    public void OnTriggerEnter(Collider player)
-    { 
-        if (player.name == "aj")
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("aj"))
         {
-            // Get RunnerAgent component from the player
-            RunnerAgent agent = player.GetComponent<RunnerAgent>();
+            RunnerAgent agent = other.GetComponent<RunnerAgent>();
             if (agent != null)
             {
-                agent.CollectCoin();  // Add reward for ML-Agent
+                agent.CollectCoin(); // Reward the agent
             }
 
-            Counter();
+            // Update coin UI counter
+            if (coinCounter != null)
+            {
+                int currentCount = int.Parse(coinCounter.text);
+                coinCounter.text = (currentCount + 1).ToString();
+            }
 
-            AudioSource.PlayClipAtPoint(clip, this.gameObject.transform.position);
-            GameObject.Destroy(gameObject);
+            // Play sound
+            if (clip != null)
+                AudioSource.PlayClipAtPoint(clip, transform.position);
+
+            // Destroy the coin object
+            Destroy(gameObject);
         }
     }
 
-    void Counter()
+    void Update()
     {
-        coin.text = (int.Parse(coin.text) + 1).ToString();
-    }
-
-    private void Update()
-    {
-        Cn.transform.Rotate(1, 0, 0);
+        // Optional rotating visual effect
+        if (rotatingVisual != null)
+        {
+            rotatingVisual.transform.Rotate(1f, 0f, 0f);
+        }
     }
 }

@@ -3,52 +3,25 @@
 public class playercollision : MonoBehaviour
 {
     public playermovement movement;
-    public Transform player;
     public Animator anim;
 
     void OnCollisionEnter(Collision collisionInfo)
+{
+    Debug.Log($"[Collision] Agent collided with: {collisionInfo.collider.gameObject.name}, tag: {collisionInfo.collider.tag}, position: {collisionInfo.collider.transform.position}");
+
+    if (collisionInfo.collider.CompareTag("Obstacle"))
     {
-        if (collisionInfo.collider.tag == "Obstacle")
+        movement.enabled = false;
+        anim.SetBool("fall", true);
+
+        RunnerAgent agent = GetComponent<RunnerAgent>();
+        if (agent != null)
         {
-            Debug.Log("aa");
-            movement.enabled = false;
-            anim.SetBool("fall", true);
-
-            // Get RunnerAgent component and penalize
-            RunnerAgent agent = GetComponent<RunnerAgent>();
-            if (agent != null)
-            {
-                agent.HitObstacle();  // Penalize and end episode
-            }
-
-            FindObjectOfType<GameManager>().endgame();
+            agent.HitObstacle();
         }
-        
-        // Your commented coin or bottle logic can be adapted similarly if needed
+
+        FindObjectOfType<GameManager>().endgame();
     }
 }
 
-        /*     if(collisionInfo.collider.tag == "coin")
-             {
-                 Debug.Log("j");
-                 movement.enabled = false;
-                 anim.SetBool("drink", true);
-             }
-             /*if (collisionInfo.collider.tag == "bottle")
-             {
-                 Debug.Log("jj");
-                 movement.enabled = false;
-                 anim.SetBool("drink",true);
-
-                 //FindObjectOfType<GameManager>().endgame();
-
-             }
- 
-            void end()
-        {
-            FindObjectOfType<GameManager>().endgame();
-        }*/
-
-
-
-
+}

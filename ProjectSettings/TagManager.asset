@@ -12,6 +12,9 @@ TagManager:
   - aj
   - coin
   - diamond
+  - jumper
+  - obstacle
+  - Ground
   layers:
   - Default
   - TransparentFX

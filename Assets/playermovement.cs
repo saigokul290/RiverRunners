@@ -2,118 +2,106 @@
 
 public class playermovement : MonoBehaviour
 {
-    public AudioSource audio;
-    public AudioSource audiobeforespace;
-    public float speed;
-    public float rotationSpeed;
+    public float speed = 5f;
     public Animator anim;
-    public float MoveDistance = 2f;
-    public bool check = true;
 
-    private int playerPosition = 1;
-    public bool runn = true;
+    // Lane indices: 0=left, 1=center, 2=right
+    public int playerPosition = 1;   // default: center lane
     public bool isGrounded = true;
+    public bool runn = true;
+
+    // Use your actual measured lane X centers
+    public float[] laneCenters = new float[3] { -1.4f, 0f, 1.4f };
+
+    private float lastLaneSwitchTime = -999f;
+    public float laneSwitchCooldown = 0.2f;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        random_animations();
+        if (anim == null) anim = GetComponent<Animator>();
         runn = true;
         anim.SetBool("run", runn);
+
+        SnapToLaneCenter();
     }
 
-    void Update()
-    {
-        runcheck();
+ void Update()
+{
+    if (!runn) return;
+    RUN();
 
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            // optional escape/pause logic
-        }
-    }
+    // Debug: Print current lane and true X every frame
+    Debug.Log($"[PlayerPos] X={transform.position.x:F2}, playerPosition={playerPosition}");
+}
 
-    void random_animations()
-    {
-        int m = Random.Range(0, 4);
-        anim.Play("d" + (m + 1), -1, 1f);
-    }
+
 
     void RUN()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
-        Debug.Log("Moving Forward → Speed: " + speed + ", Position: " + transform.position);
     }
 
-    void runcheck()
-    {
-        if (runn)
-        {
-            audiobeforespace?.Stop();
-            if (check)
-            {
-                // audio?.Play();
-                check = false;
-            }
-            RUN();
-        }
-    }
-
-    void end()
-    {
-        FindObjectOfType<GameManager>()?.endgame();
-    }
-
-    void endjump()
-    {
-        anim.SetBool("j", false);
-        anim.Play("run");
-    }
-
-    // ✅ Required by PythonBridge.cs
-    public void MoveLeft()
+    public void MoveLeft(string source = "agent")
     {
         if (!runn) return;
-
-        if (playerPosition > 0)
+        if (playerPosition > 0 && Time.time - lastLaneSwitchTime > laneSwitchCooldown)
         {
-            transform.Translate(-MoveDistance, 0, 0);
             playerPosition--;
-            Debug.Log("⏪ Move Left (from Python)");
+            SnapToLaneCenter();
+            lastLaneSwitchTime = Time.time;
         }
     }
 
-    public void MoveRight()
+    public void MoveRight(string source = "agent")
     {
         if (!runn) return;
-
-        if (playerPosition < 2)
+        if (playerPosition < laneCenters.Length - 1 && Time.time - lastLaneSwitchTime > laneSwitchCooldown)
         {
-            transform.Translate(MoveDistance, 0, 0);
             playerPosition++;
-            Debug.Log("⏩ Move Right (from Python)");
+            SnapToLaneCenter();
+            lastLaneSwitchTime = Time.time;
         }
     }
 
-    public void Jump()
+    public void Jump(string source = "agent")
     {
         if (!runn || !isGrounded) return;
-
         anim.SetBool("j", true);
+        anim.SetBool("run", false);
         isGrounded = false;
-        Debug.Log("⏫ Jump (from Python)");
-        // Optionally trigger animation event to call `endjump()`
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Debug.Log("☠️ Hit obstacle, disabling player!");
-            gameObject.SetActive(false);  // Triggers 'done = True'
-        }
-        else if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
         }
+    }
+
+    public void SnapToLaneCenter()
+    {
+        Vector3 pos = transform.position;
+        transform.position = new Vector3(laneCenters[playerPosition], pos.y, pos.z);
+    }
+
+    public void ResetPosition()
+    {
+        playerPosition = 1; // center
+        transform.position = new Vector3(laneCenters[playerPosition], 0.5f, 0f);
+        isGrounded = true;
+        runn = true;
+
+        if (anim == null) anim = GetComponent<Animator>();
+        anim.SetBool("j", false);
+        anim.SetBool("run", true);
+        anim.SetBool("dance", false);
+    }
+
+    public void endjump()
+    {
+        anim.SetBool("j", false);
+        anim.SetBool("run", true);
+        anim.Play("run");
     }
 }
