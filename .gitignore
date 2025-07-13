@@ -11,6 +11,16 @@
 [Mm]emoryCaptures/
 sysinfo.txt
 /mlagent/Lib/
+# Ignore all venvs and conda envs
+# Ignore all venvs and conda envs
+**/Lib/site-packages/
+**/env/
+**/venv/
+
+# Ignore Python virtual environments
+ML/mlagents-env-clean/
+mlagents-env/Lib/site-packages/torch/lib/dnnl.lib 
+
 
 # Cache & Generated files to ignore explicitly
 [Ll]ibrary/Artifacts/
