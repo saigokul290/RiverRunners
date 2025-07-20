@@ -1,0 +1,29 @@
+{
+    "RunnerAgent": {
+        "checkpoints": [
+            {
+                "steps": 178586,
+                "file_path": "results/RunnerAgent_11/RunnerAgent/RunnerAgent-178586.onnx",
+                "reward": 7.234440042372839,
+                "creation_time": 1752591802.800746,
+                "auxillary_file_paths": [
+                    "results/RunnerAgent_11/RunnerAgent/RunnerAgent-178586.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 178586,
+            "file_path": "results/RunnerAgent_11/RunnerAgent.onnx",
+            "reward": 7.234440042372839,
+            "creation_time": 1752591802.800746,
+            "auxillary_file_paths": [
+                "results/RunnerAgent_11/RunnerAgent/RunnerAgent-178586.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0"
+    }
+}

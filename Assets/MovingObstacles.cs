@@ -2,19 +2,21 @@
 
 public class MovingObstacles : MonoBehaviour
 {
-    public int speed = 2;
+    public float speed = 2f;
+    public float leftBound = -2.1f;
+    public float rightBound = 2.0f;
 
-    // Update is called once per frame
+    private int direction = 1;
+
     void FixedUpdate()
     {
-        if(transform.position.x<=-2.1)
-        {
-            speed = 2;
-        }
-        if (transform.position.x >= 2)
-        {
-            speed = -2;
-        }
-        transform.Translate(speed * Time.deltaTime, 0, 0);
+        // Reverse direction at bounds
+        if (transform.position.x <= leftBound)
+            direction = 1;
+        else if (transform.position.x >= rightBound)
+            direction = -1;
+
+        // Move obstacle left or right
+        transform.Translate(Vector3.right * speed * direction * Time.deltaTime);
     }
 }
