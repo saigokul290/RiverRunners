@@ -102,3 +102,4 @@ $RECYCLE.BIN/
 # Addressables generated binary content (optional)
 Assets/AddressableAssetsData/*/*.bin
 Assets/AddressableAssetsData/*/*.catalog
+mlagents-env/
