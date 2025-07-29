@@ -2,49 +2,58 @@
     "RunnerAgent": {
         "checkpoints": [
             {
-                "steps": 212676,
-                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-212676.onnx",
-                "reward": 0.606530224454814,
-                "creation_time": 1753533575.942399,
+                "steps": 1446080,
+                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-1446080.onnx",
+                "reward": 31.494858578631753,
+                "creation_time": 1753593673.890917,
                 "auxillary_file_paths": [
-                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-212676.pt"
+                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-1446080.pt"
                 ]
             },
             {
-                "steps": 310572,
-                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-310572.onnx",
-                "reward": -2.3161672494159293,
-                "creation_time": 1753537957.951381,
+                "steps": 1499965,
+                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-1499965.onnx",
+                "reward": 17.673467660682242,
+                "creation_time": 1753594792.3758872,
                 "auxillary_file_paths": [
-                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-310572.pt"
+                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-1499965.pt"
                 ]
             },
             {
-                "steps": 499940,
-                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-499940.onnx",
-                "reward": 5.059636816929479,
-                "creation_time": 1753541112.414554,
+                "steps": 1512860,
+                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-1512860.onnx",
+                "reward": 13.01802217708507,
+                "creation_time": 1753595125.469553,
                 "auxillary_file_paths": [
-                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-499940.pt"
+                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-1512860.pt"
                 ]
             },
             {
-                "steps": 529451,
-                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-529451.onnx",
-                "reward": null,
-                "creation_time": 1753541565.0916219,
+                "steps": 1697759,
+                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-1697759.onnx",
+                "reward": 26.15014081152827,
+                "creation_time": 1753619341.568725,
                 "auxillary_file_paths": [
-                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-529451.pt"
+                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-1697759.pt"
+                ]
+            },
+            {
+                "steps": 1718255,
+                "file_path": "results/RunnerAgent16/RunnerAgent/RunnerAgent-1718255.onnx",
+                "reward": 11.311962653032845,
+                "creation_time": 1753619477.200372,
+                "auxillary_file_paths": [
+                    "results/RunnerAgent16/RunnerAgent/RunnerAgent-1718255.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 529451,
+            "steps": 1718255,
             "file_path": "results/RunnerAgent16/RunnerAgent.onnx",
-            "reward": null,
-            "creation_time": 1753541565.0916219,
+            "reward": 11.311962653032845,
+            "creation_time": 1753619477.200372,
             "auxillary_file_paths": [
-                "results/RunnerAgent16/RunnerAgent/RunnerAgent-529451.pt"
+                "results/RunnerAgent16/RunnerAgent/RunnerAgent-1718255.pt"
             ]
         }
     },

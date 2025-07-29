@@ -49,12 +49,12 @@
 
             movement.ResetPosition();
             movement.SnapToLaneCenter();
-            float randomZ = Random.Range(-0f, -330f); // Somewhere mid-level
-            transform.position = new Vector3(movement.laneCenters[1], 0.5f, randomZ); // Start in center lane
-            lastZPosition = randomZ;
+            // float randomZ = Random.Range(-0f, -320f); // Somewhere mid-level
+            // transform.position = new Vector3(movement.laneCenters[1], 0.5f, randomZ); // Start in center lane
+            // lastZPosition = randomZ;
 
-            // transform.position = new Vector3(movement.laneCenters[1], 0.5f, 0f); // center lane
-            // lastZPosition = transform.position.z;
+            transform.position = new Vector3(movement.laneCenters[1], 0.5f, 0f); // center lane
+            lastZPosition = transform.position.z;
 
             Animator anim = GetComponent<Animator>();
             if (anim != null)
@@ -114,8 +114,6 @@
                 }
             }
         }
-
-
 
         public override void OnActionReceived(ActionBuffers actions)
         {
@@ -260,7 +258,7 @@
                 float xDiff = Mathf.Abs(obsX - xCenter);
 
                 // ✅ Log all potential obstacles
-                Debug.Log($"[Scan] Obs={obs.name}, Lane={lane}, Z={obsZ:F2}, dz={dz:F2}, xDiff={xDiff:F2}");
+                //Debug.Log($"[Scan] Obs={obs.name}, Lane={lane}, Z={obsZ:F2}, dz={dz:F2}, xDiff={xDiff:F2}");
 
                 // Loosen condition: allow detection if aligned within 1.0 unit in X, and ahead in Z
                 if (dz < 0f && Mathf.Abs(dz) < 15f && xDiff <= 1.0f)
@@ -309,13 +307,13 @@
 
             if (nearest != null)
             {
-                Debug.Log($"[Collision] Agent hit obstacle! AgentPos: x={transform.position.x:F2}, z={transform.position.z:F2} | " +
+                Debug.Log($"[Action] Agent hit obstacle! AgentPos: x={transform.position.x:F2}, z={transform.position.z:F2} | " +
                         $"ObstaclePos: x={nearest.transform.position.x:F2}, z={nearest.transform.position.z:F2} | " +
                         $"DistanceZ: {minDist:F2}");
             }
             else
             {
-                Debug.LogWarning($"[Collision] Agent hit an obstacle, but no nearby obstacle was found!");
+                Debug.LogWarning($"[Action] Agent hit an obstacle, but no nearby obstacle was found!");
             }
 
             AddReward(obstaclePenalty);

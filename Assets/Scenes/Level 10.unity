@@ -18244,7 +18244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb91c20ec43eda4e9ebc1040828bfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 34
+  speed: 28
   anim: {fileID: 0}
   playerPosition: 1
   isGrounded: 1
@@ -18446,9 +18446,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 431727d7ed8ad4739b43d4f07509109e, type: 3}
   m_InferenceDevice: 1
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: RunnerAgent
   TeamId: 0
   m_UseChildSensors: 1
