@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class playermovement : MonoBehaviour
+public class playermovementMultiple : MonoBehaviour
 {
     public float speed = 5f;
     public Animator anim;
@@ -71,44 +71,44 @@ void Update()
         isGrounded = false;
     }
 
-    void OnCollisionEnter(Collision collision)
+ void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.CompareTag("Ground"))
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-            Debug.Log("[Collision] Landed on ground — isGrounded = true");
-        }
-        else if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Vector3 agentPos = transform.position;
-            Vector3 obsPos = collision.transform.position;
-            float distanceZ = agentPos.z - obsPos.z;
-
-            // Only trigger HitObstacle if obstacle is ahead or overlapping
-            if (distanceZ < 0.3f)
-            {
-                Debug.Log($"[ValidHit] AgentPos: z={agentPos.z:F2} | ObstaclePos: z={obsPos.z:F2} | DistanceZ: {distanceZ:F2}");
-
-                anim.SetTrigger("Fall");
-                runn = false;
-                Debug.Log("[Movement] Player movement stopped after collision (runn = false)");
-
-                RunnerAgent agent = GetComponent<RunnerAgent>();
-                if (agent != null)
-                {
-                    agent.HitObstacle();  // Apply penalty + EndEpisode
-                    Debug.Log("[Reward] Called agent.HitObstacle() → Ended episode with penalty");
-                }
-
-            }
-
-        }
-        else
-        {
-            Debug.Log($"[Collision] Hit non-ground, non-obstacle object: '{collision.gameObject.name}'");
-        }
-
+        isGrounded = true;
     }
+    else if (collision.gameObject.CompareTag("Obstacle"))
+    {
+        Vector3 agentPos = transform.position;
+        Vector3 obsPos = collision.transform.position;
+        float distanceZ = agentPos.z - obsPos.z;
+
+        if (distanceZ < 0.3f)
+        {
+            anim.SetTrigger("Fall");
+            runn = false;
+
+            // Make ALL agents stop
+            foreach (var other in FindObjectsOfType<playermovementMultiple>())
+                other.runn = false;
+
+            // ✅ Immediately focus camera on THIS crashed agent
+            followplayerMultiple cam = FindObjectOfType<followplayerMultiple>();
+            if (cam != null)
+                cam.FocusOn(transform);
+
+            // ✅ Restart with a short delay (so focus is visible)
+            GameManagerMultiple gm = FindObjectOfType<GameManagerMultiple>();
+            if (gm != null)
+            {
+                gm.endgame();
+                // gm.CancelInvoke(); // cancel any pending restarts
+                // gm.Invoke(nameof(gm.endgame), 1.5f); // delay restart slightly
+            }
+        }
+    }
+
+}
 
 
     public void SnapToLaneCenter()
@@ -117,10 +117,11 @@ void Update()
         transform.position = new Vector3(laneCenters[playerPosition], pos.y, pos.z);
     }
 
-    public void ResetPosition()
+    public void ResetPosition(float startZ)
     {
-        playerPosition = 1; // center
-        transform.position = new Vector3(laneCenters[playerPosition], 0.5f, 0f);
+        playerPosition = 1; // reset to center lane
+       transform.position = new Vector3(laneCenters[playerPosition], 0.5f, startZ);
+ 
         isGrounded = true;
         runn = true;
 
