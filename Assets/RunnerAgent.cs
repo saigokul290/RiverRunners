@@ -3,6 +3,8 @@
     using Unity.MLAgents.Sensors;
     using Unity.MLAgents.Actuators;
     using System.Linq;
+    using Unity.MLAgents.Policies;
+
 
     public class RunnerAgent : Agent
     {
@@ -41,47 +43,53 @@
             lastZPosition = transform.position.z;
         }
 
-        public override void OnEpisodeBegin()
+    public override void OnEpisodeBegin()
+    {
+        playermovement move = GetComponent<playermovement>();
+        if (move != null)
         {
-
-            episodeEnded = false;
-            episodeJustStarted = true;
-
-            movement.ResetPosition();
-            movement.SnapToLaneCenter();
-            float randomZ = Random.Range(-0f, -200f); // Somewhere mid-level
-            transform.position = new Vector3(movement.laneCenters[1], 0.5f, randomZ); // Start in center lane
-            lastZPosition = randomZ;
-
-            // transform.position = new Vector3(movement.laneCenters[1], 0.5f, 0f); // center lane
-            // lastZPosition = transform.position.z;
-
-            Animator anim = GetComponent<Animator>();
-            if (anim != null)
-            {
-                anim.SetBool("j", false);
-                anim.SetBool("run", true);
-                anim.SetBool("dance", false);
-                anim.Play("run");
-            }
-
-            movement.isGrounded = true;
-            lastAction = 0;
-            //  Debug.Log("[ObstacleScan] Listing all obstacles with position and lane:");
-            // foreach (var obs in FindObjectsOfType<ObstacleScript>())
-            // {
-            //     Debug.Log($"[Obstacle] {obs.name} → X={obs.transform.position.x:F2}, Z={obs.transform.position.z:F2}, Lane={obs.laneIndex}");
-
-            // }
-
-            foreach (var obstacle in FindObjectsOfType<ObstacleScript>())
-            {
-                obstacle.passed = false;
-                obstacle.recentlyNear = false;
-            //  Debug.Log($"[ObstacleInit] {obstacle.name} → Lane {obstacle.laneIndex}, X={obstacle.transform.position.x:F2}, Z={obstacle.transform.position.z:F2}");
-        
+            move.ResetPosition();
         }
+
+        episodeEnded = false;
+        episodeJustStarted = true;
+        movement.SnapToLaneCenter();
+
+        float startZ = 0f;
+
+// Offset agents so they don’t overlap
+if (gameObject.name.Contains("RunnerAgent2"))
+    startZ = -5f;
+else if (gameObject.name.Contains("RunnerAgent3"))
+    startZ = -10f;
+
+// Pick a random lane index (0=left, 1=center, 2=right)
+int randomLane = Random.Range(0, movement.laneCenters.Length);
+
+// Apply both Z offset and random lane
+transform.position = new Vector3(movement.laneCenters[randomLane], 0.5f, startZ);
+movement.playerPosition = randomLane;  // sync playermovement with chosen lane
+lastZPosition = startZ;
+
+        Animator anim = GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.SetBool("j", false);
+            anim.SetBool("run", true);
+            anim.SetBool("dance", false);
+            anim.Play("run");
         }
+
+        movement.isGrounded = true;
+        lastAction = 0;
+
+        foreach (var obstacle in FindObjectsOfType<ObstacleScript>())
+        {
+            obstacle.passed = false;
+            obstacle.recentlyNear = false;
+        }
+    }
+
         public override void CollectObservations(VectorSensor sensor)
         {
             Vector3 p = transform.position;
@@ -367,7 +375,12 @@
 
         return distances;
         }
+        void Awake()
+        {
+            // All RunnerAgents share the same policy
+            GetComponent<BehaviorParameters>().BehaviorName = "RunnerBehavior";
 
+        }
         
 
     }
