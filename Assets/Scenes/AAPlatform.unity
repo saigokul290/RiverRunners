@@ -1800,6 +1800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completelevelui: {fileID: 1381036479912979}
+  speedIncreasePerRestart: 2
 --- !u!114 &178102147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3069,7 +3070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4932463942082816, guid: 881bb6ae806c1b74284970a42224d2ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4932463942082816, guid: 881bb6ae806c1b74284970a42224d2ea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3135,7 +3136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82421b82d787bdb48804e57591c8f206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneIndex: 0
+  laneIndex: 1
   recentlyNear: 0
   passed: 0
 --- !u!114 &323801392
@@ -3166,7 +3167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82421b82d787bdb48804e57591c8f206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneIndex: 0
+  laneIndex: 1
   recentlyNear: 0
   passed: 0
 --- !u!114 &323801394
@@ -4623,7 +4624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82421b82d787bdb48804e57591c8f206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laneIndex: 0
+  laneIndex: 2
   recentlyNear: 0
   passed: 0
 --- !u!1001 &457911318
@@ -10313,7 +10314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 411844, guid: 532ee50e20554ae4d8287b34e4c6bcb6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 411844, guid: 532ee50e20554ae4d8287b34e4c6bcb6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14524,7 +14525,7 @@ PrefabInstance:
     - target: {fileID: 102938570077158707, guid: 9dd9751267f1fb94a9bbe1e415cd37c9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 102938570077158707, guid: 9dd9751267f1fb94a9bbe1e415cd37c9,
         type: 3}
@@ -14614,7 +14615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 447756, guid: be586f7a2d5b1934abf61a0f6b060ac7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.44
       objectReference: {fileID: 0}
     - target: {fileID: 447756, guid: be586f7a2d5b1934abf61a0f6b060ac7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15127,6 +15128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completelevelui: {fileID: 1277459997}
+  speedIncreasePerRestart: 2
 --- !u!4 &1450965519
 Transform:
   m_ObjectHideFlags: 0
@@ -17913,7 +17915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cb91c20ec43eda4e9ebc1040828bfd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 24
+  speed: 28
   anim: {fileID: 0}
   playerPosition: 1
   isGrounded: 1

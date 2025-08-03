@@ -49,12 +49,12 @@
 
             movement.ResetPosition();
             movement.SnapToLaneCenter();
-            // float randomZ = Random.Range(-0f, -320f); // Somewhere mid-level
-            // transform.position = new Vector3(movement.laneCenters[1], 0.5f, randomZ); // Start in center lane
-            // lastZPosition = randomZ;
+            float randomZ = Random.Range(-0f, -200f); // Somewhere mid-level
+            transform.position = new Vector3(movement.laneCenters[1], 0.5f, randomZ); // Start in center lane
+            lastZPosition = randomZ;
 
-            transform.position = new Vector3(movement.laneCenters[1], 0.5f, 0f); // center lane
-            lastZPosition = transform.position.z;
+            // transform.position = new Vector3(movement.laneCenters[1], 0.5f, 0f); // center lane
+            // lastZPosition = transform.position.z;
 
             Animator anim = GetComponent<Animator>();
             if (anim != null)
