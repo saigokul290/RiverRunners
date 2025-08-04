@@ -1800,6 +1800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completelevelui: {fileID: 1381036479912979}
+  speedIncreasePerRestart: 2
 --- !u!114 &178102147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,7 +2235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1687580271}
   offset: {x: 0, y: 3.14, z: 5}
-  camera: {x: 0, y: 0, z: 0}
+  cameraOffset: {x: 0, y: 0, z: 0}
 --- !u!82 &225594461
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6949,7 +6950,7 @@ PrefabInstance:
     - target: {fileID: 3189076261778873679, guid: 4ef2fb0e5ac1785498fb862efb6e9517,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.08
+      value: 0.7000002
       objectReference: {fileID: 0}
     - target: {fileID: 3189076261778873679, guid: 4ef2fb0e5ac1785498fb862efb6e9517,
         type: 3}
@@ -11157,7 +11158,7 @@ PrefabInstance:
     - target: {fileID: 3189076261778873679, guid: 4ef2fb0e5ac1785498fb862efb6e9517,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0799998
+      value: 0.7000002
       objectReference: {fileID: 0}
     - target: {fileID: 3189076261778873679, guid: 4ef2fb0e5ac1785498fb862efb6e9517,
         type: 3}
@@ -14524,7 +14525,7 @@ PrefabInstance:
     - target: {fileID: 102938570077158707, guid: 9dd9751267f1fb94a9bbe1e415cd37c9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1
+      value: 0.7000002
       objectReference: {fileID: 0}
     - target: {fileID: 102938570077158707, guid: 9dd9751267f1fb94a9bbe1e415cd37c9,
         type: 3}
@@ -15127,6 +15128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completelevelui: {fileID: 1277459997}
+  speedIncreasePerRestart: 2
 --- !u!4 &1450965519
 Transform:
   m_ObjectHideFlags: 0

@@ -30,16 +30,17 @@ public class GameManagerMultiple : MonoBehaviour
 
     public void completelevel()
     {
-        Debug.Log("Level won!");
-        if (completelevelui != null)
-            completelevelui.SetActive(true);
+    Debug.Log("Level won!");
+    if (completelevelui != null)
+        completelevelui.SetActive(true);
 
-        // Increase speed only on successful completion
-        baseSpeed += speedIncreasePerRestart;
+    // Increase speed only on successful completion
+    baseSpeed += speedIncreasePerRestart;
 
-        // Restart after showing UI
-        Invoke(nameof(restart), 2f);
+    // Restart AFTER waiting longer (e.g., 3 seconds)
+    Invoke(nameof(restart), 3f);
     }
+
 
     public void endgame()
     {

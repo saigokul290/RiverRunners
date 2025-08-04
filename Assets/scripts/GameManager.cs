@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     float restartdelay = 2f;
     public GameObject completelevelui;
     // Static so it persists across restarts
-    public static float currentSpeed = 15f;
-    public float speedIncreasePerRestart = 2f;
+    public static float currentSpeed = 20f;
+    public float speedIncreasePerRestart = 5f;
 
      void Start()
     {
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         completelevelui.SetActive(true);
          // Increase speed before restarting
         currentSpeed += speedIncreasePerRestart;
-        restart();
+        Invoke("restart", restartdelay);
     }
     public void endgame()
     {
