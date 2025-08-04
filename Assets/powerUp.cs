@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class powerUp : MonoBehaviour
 {
@@ -12,14 +11,13 @@ public class powerUp : MonoBehaviour
 
     public void OnTriggerEnter(Collider obj)
     {
-        if (obj.name == "aj")
+        if (obj.name == "aj") // consider switching to tag-based check (CompareTag) for robustness
         {
-            // Get the RunnerAgent component from the player
             RunnerAgent agent = obj.GetComponent<RunnerAgent>();
             if (agent != null)
             {
-                agent.AddReward(0.2f);  // Give a bigger reward for rare gem
-                Debug.Log("Reward added: +0.2 for gem");
+                agent.CollectDiamond(); // triggers stacking speed boost
+                Debug.Log("[PowerUp] Diamond collected: triggering stacking speed boost.");
             }
 
             pickUp();
@@ -29,9 +27,12 @@ public class powerUp : MonoBehaviour
     public void pickUp()
     {
         Instantiate(pickUpEffect, transform.position, transform.rotation);
-        scoreincreament.check = true;
+        if (scoreincreament != null)
+        {
+            scoreincreament.check = true;
+        }
         AudioSource.PlayClipAtPoint(clip, this.gameObject.transform.position);
-        GameObject.Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     void Update()

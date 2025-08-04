@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class playermovement : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 20f;
+    [HideInInspector]
+    public float defaultSpeed = 5f; // stored base speed
+    public bool speedBoosted = false;
+
     public Animator anim;
 
     // Lane indices: 0=left, 1=center, 2=right
@@ -16,25 +21,30 @@ public class playermovement : MonoBehaviour
     private float lastLaneSwitchTime = -999f;
     public float laneSwitchCooldown = 0.2f;
 
+    // ----- Stacking speed boost fields -----
+    private Coroutine boostCoroutine;
+    private int currentStacks = 0;
+
+    [Header("Stacking Speed Boost")]
+    public int maxStacks = 3;             // maximum number of diamonds stacking
+    public float stackMultiplier = 1.2f;  // each diamond multiplies speed by this
+    public float boostDuration = 10f;      // seconds after last diamond before reset
+
     void Start()
     {
         if (anim == null) anim = GetComponent<Animator>();
         runn = true;
         anim.SetBool("run", runn);
 
+        defaultSpeed = speed; // initialize default
         SnapToLaneCenter();
     }
 
-void Update()
-{
-    if (!runn) return;
-    RUN();
-
-    // Print lane index and X position
-    //Debug.Log($"[PlayerPos] playerPosition={playerPosition}, X={transform.position:F2}");
-}
-
-
+    void Update()
+    {
+        if (!runn) return;
+        RUN();
+    }
 
     void RUN()
     {
@@ -99,17 +109,13 @@ void Update()
                     agent.HitObstacle();  // Apply penalty + EndEpisode
                     Debug.Log("[Reward] Called agent.HitObstacle() → Ended episode with penalty");
                 }
-
             }
-
         }
         else
         {
             Debug.Log($"[Collision] Hit non-ground, non-obstacle object: '{collision.gameObject.name}'");
         }
-
     }
-
 
     public void SnapToLaneCenter()
     {
@@ -136,5 +142,60 @@ void Update()
         anim.SetBool("run", true);
         anim.Play("run");
         Debug.Log("this is a change");
+    }
+
+    // ----- Stacking speed boost logic -----
+    public void BoostSpeedStacking(float multiplierPerStack, float duration)
+    {
+        if (currentStacks == 0)
+        {
+            // first stack
+            speed *= multiplierPerStack;
+            currentStacks = 1;
+        }
+        else if (currentStacks < maxStacks)
+        {
+            speed *= multiplierPerStack;
+            currentStacks++;
+        }
+        else
+        {
+            // at cap, do not further increase speed; just refresh timer
+            Debug.Log("[SpeedBoostStacking] Max stacks reached; refreshing timer only.");
+        }
+
+        speedBoosted = currentStacks > 0;
+
+        // refresh timer
+        if (boostCoroutine != null)
+            StopCoroutine(boostCoroutine);
+        boostCoroutine = StartCoroutine(BoostTimer(duration));
+
+        Debug.Log($"[SpeedBoostStacking] Stacks={currentStacks}, Speed={speed:F2}, duration refreshed to {duration}s");
+    }
+
+    private IEnumerator BoostTimer(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        // reset fully
+        speed = defaultSpeed;
+        speedBoosted = false;
+        currentStacks = 0;
+        boostCoroutine = null;
+        Debug.Log("[SpeedBoostStacking] All stacks expired; speed reset.");
+    }
+
+    public void ResetSpeed()
+    {
+        if (boostCoroutine != null)
+        {
+            StopCoroutine(boostCoroutine);
+            boostCoroutine = null;
+        }
+
+        speed = defaultSpeed;
+        speedBoosted = false;
+        currentStacks = 0;
+        Debug.Log("[SpeedReset] Speed reset to default");
     }
 }

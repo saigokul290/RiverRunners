@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("level won");
         completelevelui.SetActive(true);
          // Increase speed before restarting
-        currentSpeed += speedIncreasePerRestart;
-        Invoke("restart", restartdelay);
+       // currentSpeed += speedIncreasePerRestart;
+       // Invoke("restart", restartdelay);
     }
     public void endgame()
     {
