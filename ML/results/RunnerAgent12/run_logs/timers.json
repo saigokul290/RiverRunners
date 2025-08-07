@@ -1,0 +1,54 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1752908158",
+        "python_version": "3.10.8 (main, Jun 22 2025, 15:21:54) [Clang 16.0.0 (clang-1600.0.26.6)]",
+        "command_line_arguments": "/Users/muhammadsajjad/.pyenv/versions/mlagents-2.0.1/bin/mlagents-learn runner_config.yaml --run-id=RunnerAgent12 --resume",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.11.0",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1752908167"
+    },
+    "total": 8.657205416995566,
+    "count": 1,
+    "self": 0.011602291982853785,
+    "children": {
+        "run_training.setup": {
+            "total": 0.021156625007279217,
+            "count": 1,
+            "self": 0.021156625007279217
+        },
+        "TrainerController.start_learning": {
+            "total": 8.624446500005433,
+            "count": 1,
+            "self": 0.0028641250100918114,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 8.5024312500027,
+                    "count": 1,
+                    "self": 8.5024312500027
+                },
+                "trainer_threads": {
+                    "total": 3.082997864112258e-06,
+                    "count": 1,
+                    "self": 3.082997864112258e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 0.11914804199477658,
+                    "count": 1,
+                    "self": 0.0008765420061536133,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 0.11827149998862296,
+                            "count": 1,
+                            "self": 0.11827149998862296
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,105 @@
+# ====================== #
+# Unity generated files  #
+# ====================== #
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+sysinfo.txt
+/mlagent/Lib/
+# Ignore all venvs and conda envs
+# Ignore all venvs and conda envs
+**/Lib/site-packages/
+**/env/
+**/venv/
+
+# Ignore Python virtual environments
+ML/mlagents-env-clean/
+mlagents-env/Lib/site-packages/torch/lib/dnnl.lib 
+
+
+# Cache & Generated files to ignore explicitly
+[Ll]ibrary/Artifacts/
+[Ll]ibrary/PackageCache/
+[Ll]ibrary/BurstCache/
+[Ll]ibrary/ScriptAssemblies/
+[Ll]ibrary/ShaderCache/
+[Ll]ibrary/SourceAssetDB*
+[Ll]ibrary/Search/
+[Ll]ibrary/StateCache/
+[Ll]ibrary/expandedItems
+[Ll]ibrary/LastSceneManagerSetup.txt
+[Ll]ibrary/EditorUserBuildSettings.asset
+
+# ====================== #
+# User-specific files    #
+# ====================== #
+
+UserSettings/
+UserSettings/EditorUserSettings.asset
+UserSettings/Layouts/
+
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# ====================== #
+# OS generated files     #
+# ====================== #
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ====================== #
+# IDE/Editor settings    #
+# ====================== #
+
+# Visual Studio
+.vs/
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# ====================== #
+# Unity meta files       #
+# ====================== #
+
+# ⚠️ Recommended to track .meta files — they are essential for asset references
+# DO NOT IGNORE .meta files unless you really know what you're doing
+
+# ====================== #
+# Other generated files  #
+# ====================== #
+
+# Addressables generated binary content (optional)
+Assets/AddressableAssetsData/*/*.bin
+Assets/AddressableAssetsData/*/*.catalog
+mlagents-env/

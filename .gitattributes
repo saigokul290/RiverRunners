@@ -1,0 +1,5 @@
+Library/PackageCache/com.unity.burst@1.8.18/.Runtime/libburst-llvm-16.dylib filter=lfs diff=lfs merge=lfs -text
+*.dll filter=lfs diff=lfs merge=lfs -text
+*.dylib filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+Library/Artifacts/6d/6d2de0be71c97be5cdef02bb9cb0254f filter=lfs diff=lfs merge=lfs -text
